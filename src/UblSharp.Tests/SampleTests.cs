@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Schema;
 using FluentAssertions;
 using FluentAssertions.Equivalency;
+using FluentAssertions.Equivalency.Tracing;
 using UblSharp.Tests.Util;
 #if FEATURE_VALIDATION
 using UblSharp.Validation;
@@ -83,11 +84,11 @@ namespace UblSharp.Tests
             var trace = new StringBuilderTraceWriter();
             try
             {
-                subject.ShouldBeEquivalentTo(
+                subject.Should().BeEquivalentTo(
                     sampleDoc, options => options
                         .ExcludingProperties()
                         .ExcludingFields()
-                        .Including(x => x.SelectedMemberInfo.Name.StartsWith("__", StringComparison.Ordinal))
+                        .Including((IMemberInfo x) => x.Name.StartsWith("__", StringComparison.Ordinal))
 #if DEBUG
                         .WithTracing(trace)
 #endif
