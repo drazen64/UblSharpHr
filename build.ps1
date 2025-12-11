@@ -6,11 +6,11 @@ param (
 )
 
 # Build script configuration
-$configuration = "Release"
-$sgen = "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6 Tools\sgen.exe" 
+$configuration = "Debug"
+$sgen = "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sgen.exe" 
 
 $projects = @(
-    @{root = '.\src\UblSharp'; csproj = 'UblSharp.csproj'; sgen = @("net20", "net35", "net40")},
+    @{root = '.\src\UblSharp'; csproj = 'UblSharp.csproj'; sgen = @("netstandard20", "net48")},
     @{root = '.\src\UblSharp.Validation'; csproj = 'UblSharp.Validation.csproj'},
     @{root = '.\src\UblSharp.Generator.Core'; csproj = 'UblSharp.Generator.Core.csproj'},
     @{root = '.\src\UblSharp.SEeF'; csproj = 'UblSharp.SEeF.csproj'},
@@ -46,11 +46,11 @@ foreach ($project in $projects) {
     Write-Host "Building $projectFile... with version suffix $buildSuffix"
     
     exec { & dotnet restore $projectFile }
-    exec { & dotnet build "$projectFile" -c Release --version-suffix=$buildSuffix --no-dependencies --no-incremental /nologo }
+    exec { & dotnet build "$projectFile" -c Debug --version-suffix=$buildSuffix --no-dependencies --no-incremental /nologo }
 }
 
 # Generate XmlSerializers assemblies (in parallel)
-"net20", "net35", "net40", "net45" | ForEach-Object {
+"netstandard20", "net48" | ForEach-Object {
     $do_sgen = {
         param($sgen, $file)
         & $sgen /assembly:$file /verbose /force
@@ -67,20 +67,20 @@ Remove-Job *
 If ($SkipTests -eq $false) {
     # build tests first
     exec { & dotnet restore .\src\UblSharp.Tests\UblSharp.Tests.csproj }
-    exec { & dotnet build .\src\UblSharp.Tests\UblSharp.Tests.csproj -c Release --no-dependencies }
+    exec { & dotnet build .\src\UblSharp.Tests\UblSharp.Tests.csproj -c Debug --no-dependencies }
 
     # manually copy sgen assemblies to test bin directory
-    # hack: hard-coded platform name, note that we have a 'net45' sgen assembly, but the test project is a 'net46' project.
-    Copy-Item -Path ".\src\UblSharp\bin\$configuration\net45\UblSharp.XmlSerializers.dll" -Destination ".\src\UblSharp.Tests\bin\$configuration\net46\" -Force
+    # hack: hard-coded platform name, note that we have a 'net48' sgen assembly, but the test project is a 'net46' project.
+    Copy-Item -Path ".\src\UblSharp\bin\$configuration\net48\UblSharp.XmlSerializers.dll" -Destination ".\src\UblSharp.Tests\bin\$configuration\net48\" -Force
 
     # Build/Run tests
-    exec { & dotnet test .\src\UblSharp.Tests\UblSharp.Tests.csproj -c Release --no-build }
+    exec { & dotnet test .\src\UblSharp.Tests\UblSharp.Tests.csproj -c Debug --no-build }
 }
 
 # Create packages  
 foreach ($project in $projects) {   
     $projectFile = $(Join-Path $project['root'] $project['csproj'])
-    exec { & dotnet pack $projectFile -c Release --no-build $versionsuffix --include-symbols -o "$PSScriptRoot\artifacts" }
+    exec { & dotnet pack $projectFile -c Debug --no-build $versionsuffix --include-symbols -o "$PSScriptRoot\artifacts" }
 }
 
 Pop-Location

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11222.16 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UblSharp.Tests.Generator", "src\UblSharp.Tests.Generator\UblSharp.Tests.Generator.csproj", "{1F4D051D-5090-4A32-86F1-0329AB522983}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UblSharp.SCSN.Generator", "src\UblSharp.SCSN.Generator\UblSharp.SCSN.Generator.csproj", "{661B2D0E-F992-4EC9-9BA3-DC883B7F31B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UblSharp.SCSN", "src\UblSharp.SCSN\UblSharp.SCSN.csproj", "{D4DEC59D-5E8D-4845-8FD9-FE23EB425B08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UblSharp.HRExt.Generator", "src\UblSharp.HRExt.Generator\UblSharp.HRExt.Generator.csproj", "{00437CA8-2593-4296-9A9C-794BAEA4F90B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UblSharp.HRExt", "src\UblSharp.HRExt\UblSharp.HRExt.csproj", "{FB17A456-B249-4FC0-BDED-2902C390BFB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{D4DEC59D-5E8D-4845-8FD9-FE23EB425B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4DEC59D-5E8D-4845-8FD9-FE23EB425B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4DEC59D-5E8D-4845-8FD9-FE23EB425B08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00437CA8-2593-4296-9A9C-794BAEA4F90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00437CA8-2593-4296-9A9C-794BAEA4F90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00437CA8-2593-4296-9A9C-794BAEA4F90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00437CA8-2593-4296-9A9C-794BAEA4F90B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB17A456-B249-4FC0-BDED-2902C390BFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB17A456-B249-4FC0-BDED-2902C390BFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB17A456-B249-4FC0-BDED-2902C390BFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB17A456-B249-4FC0-BDED-2902C390BFB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
